@@ -1,0 +1,145 @@
+body {
+  font-family: "Raleway", sans-serif;
+  background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+  margin: 0;
+  padding: 0;
+  border-radius: 70px;
+}
+.container {
+  max-width: 700px;
+  min-width: 700px;
+  margin-bottom: 20px;
+}
+.title {
+  font-size: 70px;
+  font-weight: 400;
+}
+
+.form-rounded {
+  border-radius: 20px;
+  margin-bottom: 15px;
+  width: 500px;
+  background: #7c7c7c2b;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  outline: none;
+  border: none;
+}
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-bar {
+  margin: 0.5em;
+  border-radius: 50%;
+  border: none;
+  height: 44px;
+  width: 44px;
+  outline: none;
+  background: #7c7c7c2b;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+button:hover {
+  background: #7c7c7c6b;
+}
+.current-location {
+  background: #000000d0;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  border-radius: 25px;
+  margin-top: 10px;
+  padding: 7px;
+  width: 670px;
+}
+.first-card {
+  border-radius: 30px !important;
+  color: white;
+  background: #000000d0;
+  padding: 16px;
+}
+.city-name {
+  margin: 10px;
+  position: absolute;
+}
+.city-name p {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.city-name span {
+  font-size: 15px;
+  font-weight: 700;
+}
+.card-mid {
+  align-content: space-around;
+}
+.card {
+  color: white;
+  background: #000000d0;
+}
+.temperature {
+  font-size: 55px;
+  font-weight: 900;
+  margin: auto 0;
+  padding: 0;
+  position: relative;
+  top: 20px;
+  left: 160px;
+}
+.temp-unit {
+  font-size: 30px;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+.card-bottom {
+  margin-top: 85px;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.summary {
+  font-size: 15px;
+  font-weight: 100;
+}
+.date {
+  font-size: 15px;
+  font-weight: 500;
+}
+.weather-summary {
+  position: relative;
+  top: 70px;
+  left: 200px;
+  font-weight: 900px;
+}
+
+.weather-icon svg {
+  width: 20%;
+  height: 20%;
+  margin: 0px auto;
+  padding: 0px;
+}
+
+.row svg {
+  position: static;
+}
+.mon {
+  padding-left: 280px;
+}
+.tue {
+  padding-left: 278px;
+}
+.wed {
+  padding-left: 250px;
+}
+.thur {
+  padding-left: 266px;
+}
+.fri {
+  padding-left: 296px;
+}
