@@ -143,3 +143,10 @@ a {
 .fri {
   padding-left: 296px;
 }
+
+.sourceCode {
+  color: black;
+}
+.sourceLink {
+  text-align: center;
+}
