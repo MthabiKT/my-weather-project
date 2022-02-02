@@ -7,7 +7,7 @@ body {
 }
 .container {
   max-width: 700px;
-  min-width: 700px;
+  min-width: 715px;
   margin-bottom: 20px;
 }
 .title {
@@ -130,18 +130,6 @@ a {
 }
 .mon {
   padding-left: 280px;
-}
-.tue {
-  padding-left: 278px;
-}
-.wed {
-  padding-left: 250px;
-}
-.thur {
-  padding-left: 266px;
-}
-.fri {
-  padding-left: 296px;
 }
 
 .sourceCode {
