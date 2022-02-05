@@ -30,38 +30,22 @@ function formatDate() {
 }
 
 formatDate();
-displayForecast();
+function displayForecast(response) {
+  console.log(response.data.daily);
 
-function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
-
-  forecastElement.innerHTML = "forcast";
-  let days = ["Tuesday", "Wednesday", "Thurday", "Friday", "Saturday"];
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
+  days.forEach(function (forecastDay) {
     forecastHTML =
       forecastHTML +
       `
   
             <div class="row.box-a text-left" style="padding: 10px">
-              
-               ${day}
-                <span class="min-icons col-sm-4.box-a ">
-                 20&deg;C / 18&deg;C
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-clouds"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      d="M16 7.5a2.5 2.5 0 0 1-1.456 2.272 3.513 3.513 0 0 0-.65-.824 1.5 1.5 0 0 0-.789-2.896.5.5 0 0 1-.627-.421 3 3 0 0 0-5.22-1.625 5.587 5.587 0 0 0-1.276.088 4.002 4.002 0 0 1 7.392.91A2.5 2.5 0 0 1 16 7.5z"
-                    />
-                    <path
-                      d="M7 5a4.5 4.5 0 0 1 4.473 4h.027a2.5 2.5 0 0 1 0 5H3a3 3 0 0 1-.247-5.99A4.502 4.502 0 0 1 7 5zm3.5 4.5a3.5 3.5 0 0 0-6.89-.873.5.5 0 0 1-.51.375A2 2 0 1 0 3 13h8.5a1.5 1.5 0 1 0-.376-2.953.5.5 0 0 1-.624-.492V9.5z"
-                    />
+            
+               ${forecastDay.dt}
+                <span class="weather-forecast-temperature-max ">
+                ${forecastDay.temp.max}&deg;C </span>/  <span class="weather-forecast-temperature-min">${forecastDay.temp.min}&deg;C </span>
+                   <img src="http://openweathermap.org/img/wn/10d@2x.png" id="icon" class="bi bi-clouds-fill" />
                   </svg>
                 </span>
             </div>
@@ -70,10 +54,11 @@ function displayForecast() {
   });
 
   forecastHTML = forecastHTML + `</div>`;
-  forecast.innerHTML = forecastHTML;
+  forecastElement.innerHTML = forecastHTML;
 
   console.log(forecastHTML);
 }
+displayForecast();
 
 function searchCity(event) {
   event.preventDefault();
@@ -93,7 +78,14 @@ function searchCity(event) {
 let searchedCity = document.querySelector("#search-form");
 searchedCity.addEventListener("submit", searchCity);
 
-//search-engine
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "ae5e9256f0e601c5ba82629afefbe54e";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+  console.log(coordinates);
+}
+
 function displayWeather(response) {
   console.log(response);
 
@@ -102,8 +94,12 @@ function displayWeather(response) {
   let displayTemp = document.querySelector("#degree");
   let temp = Math.round(response.data.main.temp);
   displayTemp.innerHTML = `${temp}`;
-  let displayIcon = (document.querySelector("#icon").src =
-    "https://openweathermap.org/img/wn/" + icon + ".png");
+  let displayIcon = document.querySelector("#icon");
+  displayIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/$[response.data.weather[0].icon]@2x.png]`
+  );
+
   displayIcon.innerHTML = response.data.weather[0].icon;
   let displaySummary = document.querySelector(".summary");
   displaySummary.innerHTML = response.data.weather[0].description;
@@ -116,9 +112,10 @@ function displayWeather(response) {
   humidity.innerHTML = response.data.main.humidity;
   let minTemp = document.querySelector("#low-temp");
   minTemp, (innerHTML = response.data.main.temp_min);
+
+  getForecast(response.data.coord);
 }
 
-//Bonus Feature
 function showPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
