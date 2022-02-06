@@ -58,18 +58,18 @@ function displayForecast(response) {
     "Saturday",
     "Sunday",
   ];
-  let forecastHTML = `<div class="row d-flex justify-content-evenly" >`;
+  let forecastHTML = `<div class="row weather-temperature " >`;
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
         `
-     <div class="col-sm col-md col-md-lg justify-content-evenly">
+     <div class="col">
              <div
-            class="card-bottom weather-temperature forcast-wrapper"
+            class="card-bottom  forcast-wrapper"
             id="forecast"
           >
-               ${formatDay(forecastDay.dt)} </div>
+               ${formatDay(forecastDay.dt)} 
                 <span class="weather-forecast-temperature-max ">
                 ${Math.round(
                   forecastDay.temp.max
@@ -78,9 +78,10 @@ function displayForecast(response) {
         )}&deg;C </span>
                    <img src="http://openweathermap.org/img/wn/${
                      forecastDay.weather[0].icon
-                   }@2x.png" id="icon" class="bi bi-clouds-fill" />
+                   }@2x.png" id="icon"  />
                   
                 </span>
+            </div>
             </div>
   `;
     }
@@ -108,6 +109,13 @@ function searchCity(event) {
 
 let searchedCity = document.querySelector("#search-form");
 searchedCity.addEventListener("submit", searchCity);
+
+function citySearch(city) {
+  let apiKey = "ae5e9256f0e601c5ba82629afefbe54e";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeather);
+}
+citySearch("mbabane");
 
 function getForecast(coordinates) {
   console.log(coordinates);
@@ -143,48 +151,9 @@ function displayWeather(response) {
   humidity.innerHTML = response.data.main.humidity;
   let minTemp = document.querySelector("#low-temp");
   minTemp, (innerHTML = response.data.main.temp_min);
+  let wind = document.querySelector("#wind-speed");
+  wind.innerHTML = Math.round(response.data.wind.speed);
 
   getForecast(response.data.coord);
   displayForecast();
 }
-
-function showPosition(position) {
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
-  let apiKey = "ae5e9256f0e601c5ba82629afefbe54e";
-  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-  axios.get(url).then(currentWeather);
-}
-
-function currentWeather(response) {
-  let displayCity = document.querySelector("#current-city");
-  displayCity.innerHTML = response.data.name;
-  let displayTemp = document.querySelector("#degree");
-  let temp = Math.round(response.data.main.temp);
-  displayTemp.innerHTML = `${temp}`;
-  let displayIcon = document.querySelector("#icon");
-  displayIcon.setAttribute(
-    "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
-  let displaySummary = document.querySelector(".summary");
-  displaySummary.innerHTML = response.data.weather[0].description;
-  let displayDescription = document.querySelector("#description");
-  displayDescription.innerHTML = response.data.weather[0].main;
-  let displayFeelsLike = document.querySelector("#feels-like");
-  let feelsLike = Math.round(response.data.main.feels_like);
-  displayFeelsLike.innerHTML = `${feelsLike}`;
-  let humidity = document.querySelector("#humidity");
-  humidity.innerHTML = response.data.main.humidity;
-  let minTemp = document.querySelector("#low-temp");
-  minTemp, (innerHTML = response.data.main.temp_min);
-
-  displayForecast();
-}
-function getCurrentLocation(event) {
-  event.preventDefault();
-  navigator.geolocation.getCurrentPosition(showPosition);
-}
-
-let button = document.querySelector("#current-location");
-button.addEventListener("click", getCurrentLocation);
