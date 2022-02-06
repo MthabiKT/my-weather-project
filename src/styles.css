@@ -98,10 +98,10 @@ a {
   text-decoration: none;
   color: white;
 }
-.card-bottom {
-  margin-top: 85px;
-  line-height: 1;
-  margin-bottom: 20px;
+
+.forcast-wrapper {
+  margin: 10px;
+  padding: 10px;
 }
 .summary {
   font-size: 15px;
