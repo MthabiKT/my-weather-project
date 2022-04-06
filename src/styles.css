@@ -12,8 +12,9 @@ body {
   margin-bottom: 20px;
 }
 .title {
-  font-size: 70px;
-  font-weight: 400;
+  font-size: 80px;
+  font-weight: 500;
+  color: white;
 }
 
 .form-rounded {
