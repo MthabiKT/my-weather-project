@@ -1,6 +1,7 @@
 body {
   font-family: "Raleway", sans-serif;
-  background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+  background-image: url("../img/nature-japan-leaves-trees.jpg");
+  background-size: cover;
   margin: 0;
   padding: 0;
   border-radius: 70px;
